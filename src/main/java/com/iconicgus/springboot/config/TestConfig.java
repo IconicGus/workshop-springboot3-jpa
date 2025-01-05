@@ -1,8 +1,10 @@
 package com.iconicgus.springboot.config;
 
+import com.iconicgus.springboot.entities.Category;
 import com.iconicgus.springboot.entities.Order;
 import com.iconicgus.springboot.entities.User;
 import com.iconicgus.springboot.entities.enums.OrderStatus;
+import com.iconicgus.springboot.repositories.CategoryRepository;
 import com.iconicgus.springboot.repositories.OrderRepository;
 import com.iconicgus.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,17 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
         User u1 = new User("maria@gmail.com", null, "Maria Brown", "123456", "988888888");
         User u2 = new User("alex@gmail.com", null, "Alex Green", "123456", "977777777");
